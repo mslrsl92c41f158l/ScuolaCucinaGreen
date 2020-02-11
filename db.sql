@@ -1,14 +1,11 @@
--- DBTools Manager Professional (Enterprise Edition)
--- Database Dump for: cucina
--- Backup Generated in: 23/04/2010 18:50:33
--- Database Server Version: MySQL 5.1.26
+-- create user green identified by 'password';
+-- grant all privileges on cucina.* to green;
 
--- USEGO
+-- create schema cucina;
+
+use cucina;
 
 SET FOREIGN_KEY_CHECKS=0;
--- GO
-
-
 --
 -- Dumping Tables
 --
@@ -26,7 +23,7 @@ CREATE TABLE `amministratori`
 	`email` varchar (50), 
 	`telefono` varchar (50),
 	PRIMARY KEY (`id_amministratore`)
-) 
+); 
 -- GO
 
 --
@@ -53,7 +50,7 @@ CREATE TABLE `calendario`
 	`aula` varchar (50), 
 	`docente` varchar (50),
 	PRIMARY KEY (`id_edizione`)
-) 
+); 
 -- GO
 
 --
@@ -100,7 +97,7 @@ CREATE TABLE `catalogo`
 	`costo` double (13,2), 
 	`descrizione` varchar (2000),
 	PRIMARY KEY (`id_corso`)
-)
+);
 -- GO
 
 --
@@ -108,21 +105,21 @@ CREATE TABLE `catalogo`
 --
 BEGIN;
 -- GO
-INSERT INTO `catalogo` (`id_corso`, `titolo`, `id_categoria`, `numeroMaxPartecipanti`, `costo`, `descrizione`) VALUES(87, 'Sfiziosit‡ di carne', 50, 15, 100.00, 'Squisiti bocconcini, piccole preparazioni classiche e ricette innovative. Un appetitoso viaggio attraverso i tanti modi di preparare e gustare la carne rossa e bianca, tra fantasia e tradizione, semplicit‡ e raffinatezza.\r\n\r\nImportante!!!\r\nIl presente corso verr‡ erogato nel/i giorno/i\r\nindicato/i nel \'Calendario Corsi\' e osserver‡ la durata di quattro ore (ore 18.00-22.00) per ogni giorno indicato.\r\nPro: poche calorie, colorati, facili da preparare, appetitosiÖ\r\nContro: una volta assaggiati vi richiederanno sempre porzioni abbondanti. da realizzareÖ\r\n\r\nImportante!!!\r\nIl presente corso verr‡ erogato nel/i giorno/i\r\nindicato/i nel \"Calendario Corsi\" e osserver‡ la durata di quattro ore (ore 18.00-22.00) per ogni giorno indicato.\r\n\r\n');
+INSERT INTO `catalogo` (`id_corso`, `titolo`, `id_categoria`, `numeroMaxPartecipanti`, `costo`, `descrizione`) VALUES(87, 'Sfiziosit√† di carne', 50, 15, 100.00, 'Squisiti bocconcini, piccole preparazioni classiche e ricette innovative. Un appetitoso viaggio attraverso i tanti modi di preparare e gustare la carne rossa e bianca, tra fantasia e tradizione, semplicit√† e raffinatezza.\r\n\r\nImportante!!!\r\nIl presente corso verr√† erogato nel/i giorno/i\r\nindicato/i nel \'Calendario Corsi\' e osserver√† la durata di quattro ore (ore 18.00-22.00) per ogni giorno indicato.\r\nPro: poche calorie, colorati, facili da preparare, appetitosi¬Ö\r\nContro: una volta assaggiati vi richiederanno sempre porzioni abbondanti. da realizzare¬Ö\r\n\r\nImportante!!!\r\nIl presente corso verr√† erogato nel/i giorno/i\r\nindicato/i nel \"Calendario Corsi\" e osserver√† la durata di quattro ore (ore 18.00-22.00) per ogni giorno indicato.\r\n\r\n');
 -- GO
-INSERT INTO `catalogo` (`id_corso`, `titolo`, `id_categoria`, `numeroMaxPartecipanti`, `costo`, `descrizione`) VALUES(88, 'Sfiziosi primiÖ vegetariani', 49, 20, 70.00, 'Pro: poche calorie, colorati, facili da preparare, appetitosiÖ\r\nContro: una volta assaggiati vi richiederanno sempre porzioni abbondanti. da realizzareÖ\r\n\r\nImportante!!!\r\nIl presente corso verr‡ erogato nel/i giorno/i\r\nindicato/i nel \"Calendario Corsi\" e osserver‡ la durata di quattro ore (ore 18.00-22.00) per ogni giorno indicato.\r\n\r\n');
+INSERT INTO `catalogo` (`id_corso`, `titolo`, `id_categoria`, `numeroMaxPartecipanti`, `costo`, `descrizione`) VALUES(88, 'Sfiziosi primi¬Ö vegetariani', 49, 20, 70.00, 'Pro: poche calorie, colorati, facili da preparare, appetitosi¬Ö\r\nContro: una volta assaggiati vi richiederanno sempre porzioni abbondanti. da realizzare¬Ö\r\n\r\nImportante!!!\r\nIl presente corso verr√† erogato nel/i giorno/i\r\nindicato/i nel \"Calendario Corsi\" e osserver√† la durata di quattro ore (ore 18.00-22.00) per ogni giorno indicato.\r\n\r\n');
 -- GO
-INSERT INTO `catalogo` (`id_corso`, `titolo`, `id_categoria`, `numeroMaxPartecipanti`, `costo`, `descrizione`) VALUES(90, 'Dessert al piatto', 53, 20, 75.00, 'Un dolce deve essere bello, sorprendente, affascinante, intrigante, profumatoÖÖal primo boccone dobbiamo desiderare subito il secondo. Ci saranno combinazioni di sapore mai forzate ma che sorprenderanno le vostre papille gustative. Otterrete da semplici ingredienti e da preparazioni del tutto tradizionali, ottimi e innovativi dessert.\r\n\r\nImportante!!!\r\nIl presente corso verr‡ erogato nel/i giorno/i\r\nindicato/i nel \"Calendario Corsi\" e osserver‡ la durata di quattro ore (ore 18.00-22.00) per ogni giorno indicato.\r\n');
+INSERT INTO `catalogo` (`id_corso`, `titolo`, `id_categoria`, `numeroMaxPartecipanti`, `costo`, `descrizione`) VALUES(90, 'Dessert al piatto', 53, 20, 75.00, 'Un dolce deve essere bello, sorprendente, affascinante, intrigante, profumato¬Ö¬Öal primo boccone dobbiamo desiderare subito il secondo. Ci saranno combinazioni di sapore mai forzate ma che sorprenderanno le vostre papille gustative. Otterrete da semplici ingredienti e da preparazioni del tutto tradizionali, ottimi e innovativi dessert.\r\n\r\nImportante!!!\r\nIl presente corso verr√† erogato nel/i giorno/i\r\nindicato/i nel \"Calendario Corsi\" e osserver√† la durata di quattro ore (ore 18.00-22.00) per ogni giorno indicato.\r\n');
 -- GO
-INSERT INTO `catalogo` (`id_corso`, `titolo`, `id_categoria`, `numeroMaxPartecipanti`, `costo`, `descrizione`) VALUES(91, 'Antipastini di mare', 48, 20, 130.00, 'Sfiziosi antipasti, pieni di sapore e profumi, ricette facilmente realizzabili, insolite e gustosissime.\r\n\r\nImportante!!!\r\nIl presente corso verr‡ erogato nel/i giorno/i\r\nindicato/i nel \"Calendario Corsi\" e osserver‡ la durata di quattro ore (ore 18.00-22.00) per ogni giorno indicato.\r\n');
+INSERT INTO `catalogo` (`id_corso`, `titolo`, `id_categoria`, `numeroMaxPartecipanti`, `costo`, `descrizione`) VALUES(91, 'Antipastini di mare', 48, 20, 130.00, 'Sfiziosi antipasti, pieni di sapore e profumi, ricette facilmente realizzabili, insolite e gustosissime.\r\n\r\nImportante!!!\r\nIl presente corso verr√† erogato nel/i giorno/i\r\nindicato/i nel \"Calendario Corsi\" e osserver√† la durata di quattro ore (ore 18.00-22.00) per ogni giorno indicato.\r\n');
 -- GO
-INSERT INTO `catalogo` (`id_corso`, `titolo`, `id_categoria`, `numeroMaxPartecipanti`, `costo`, `descrizione`) VALUES(92, 'Paste con verdure', 49, 15, 80.00, 'La primavera regala alla pasta soluzioni divertenti di sapore, all\'insegna dell\'originalit‡. Fave, melanzane, piselli, asparagi e tanti altri si sposeranno con garganelli, orecchiette, tagliolini... un gustoso matrimonio di sapori.\r\n\r\nImportante!!!\r\nIl presente corso verr‡ erogato nel/i giorno/i\r\nindicato/i nel \"Calendario Corsi\" e osserver‡ la durata di quattro ore (ore 18.00-22.00) per ogni giorno indicato.\r\n\r\n\r\n');
+INSERT INTO `catalogo` (`id_corso`, `titolo`, `id_categoria`, `numeroMaxPartecipanti`, `costo`, `descrizione`) VALUES(92, 'Paste con verdure', 49, 15, 80.00, 'La primavera regala alla pasta soluzioni divertenti di sapore, all\'insegna dell\'originalit√†. Fave, melanzane, piselli, asparagi e tanti altri si sposeranno con garganelli, orecchiette, tagliolini... un gustoso matrimonio di sapori.\r\n\r\nImportante!!!\r\nIl presente corso verr√† erogato nel/i giorno/i\r\nindicato/i nel \"Calendario Corsi\" e osserver√† la durata di quattro ore (ore 18.00-22.00) per ogni giorno indicato.\r\n\r\n\r\n');
 -- GO
-INSERT INTO `catalogo` (`id_corso`, `titolo`, `id_categoria`, `numeroMaxPartecipanti`, `costo`, `descrizione`) VALUES(93, 'Corso di cucina (base)', 54, 20, 250.00, 'Un corso fondamentale, a cadenza settimanale, un vero e proprio punto di partenza per conoscere i procedimenti e le lavorazioni indispensabili per cucinare. Ogni incontro sar‡ l\'occasione per apprendere, attraverso la realizzazione di un menu completo, piccoli segreti sull\'esecuzione di piatti basilari o sull\'acquisto e la scelta degli alimenti, la loro lavorazione e infine i \"trucchi\" dello chef che saranno il vostro asso nella manica. Un corso importante attraverso cui capire e \"provare\" la cucina, che degusterete con l\'abbinamento dei vini. Possibilit‡ di esercitarsi, nel corso della lezione, accanto allo chef. A fine corso sar‡ rilasciato un attestato.\r\n\r\nImportante!!!\r\nIl  presente corso verr‡ erogato con una cadenza settimanale a partire dal giorno\r\nindicato nel \"Calendario Corsi\"  e osserver‡ la durata di quattro ore (ore 18.00-22.00) per ogni giorno indicato.\r\n\r\n');
+INSERT INTO `catalogo` (`id_corso`, `titolo`, `id_categoria`, `numeroMaxPartecipanti`, `costo`, `descrizione`) VALUES(93, 'Corso di cucina (base)', 54, 20, 250.00, 'Un corso fondamentale, a cadenza settimanale, un vero e proprio punto di partenza per conoscere i procedimenti e le lavorazioni indispensabili per cucinare. Ogni incontro sar√† l\'occasione per apprendere, attraverso la realizzazione di un menu completo, piccoli segreti sull\'esecuzione di piatti basilari o sull\'acquisto e la scelta degli alimenti, la loro lavorazione e infine i \"trucchi\" dello chef che saranno il vostro asso nella manica. Un corso importante attraverso cui capire e \"provare\" la cucina, che degusterete con l\'abbinamento dei vini. Possibilit√† di esercitarsi, nel corso della lezione, accanto allo chef. A fine corso sar√† rilasciato un attestato.\r\n\r\nImportante!!!\r\nIl  presente corso verr√† erogato con una cadenza settimanale a partire dal giorno\r\nindicato nel \"Calendario Corsi\"  e osserver√† la durata di quattro ore (ore 18.00-22.00) per ogni giorno indicato.\r\n\r\n');
 -- GO
-INSERT INTO `catalogo` (`id_corso`, `titolo`, `id_categoria`, `numeroMaxPartecipanti`, `costo`, `descrizione`) VALUES(94, 'Corso di cucina\r\n(avanzato)\r\n', 55, 20, 260.00, 'Accontentando le numerose richieste di chi ha gi‡ superato il livello di base, cinque incontri (a cadenza settimanale) in cui approfondire quegli argomenti che escono dalla conoscenza di base e si avvicinano maggiormente all\'alta cucina. Spazieremo nel mondo delle salse, della cottura a vapore per una cucina leggera ma piena di sapore, dei bolliti fatti ad arte, della pasta fatta in casa con creativit‡, del cous cous, del pan di Spagna e molte altre ghiottonerie.\r\n\r\nImportante!!!\r\nIl  presente corso verr‡ erogato con una cadenza settimanale a partire dal giorno\r\nindicato nel \"Calendario Corsi\"  e osserver‡ la durata di quattro ore (ore 18.00-22.00) per ogni giorno indicato.\r\n');
+INSERT INTO `catalogo` (`id_corso`, `titolo`, `id_categoria`, `numeroMaxPartecipanti`, `costo`, `descrizione`) VALUES(94, 'Corso di cucina\r\n(avanzato)\r\n', 55, 20, 260.00, 'Accontentando le numerose richieste di chi ha gi√† superato il livello di base, cinque incontri (a cadenza settimanale) in cui approfondire quegli argomenti che escono dalla conoscenza di base e si avvicinano maggiormente all\'alta cucina. Spazieremo nel mondo delle salse, della cottura a vapore per una cucina leggera ma piena di sapore, dei bolliti fatti ad arte, della pasta fatta in casa con creativit√†, del cous cous, del pan di Spagna e molte altre ghiottonerie.\r\n\r\nImportante!!!\r\nIl  presente corso verr√† erogato con una cadenza settimanale a partire dal giorno\r\nindicato nel \"Calendario Corsi\"  e osserver√† la durata di quattro ore (ore 18.00-22.00) per ogni giorno indicato.\r\n');
 -- GO
-INSERT INTO `catalogo` (`id_corso`, `titolo`, `id_categoria`, `numeroMaxPartecipanti`, `costo`, `descrizione`) VALUES(95, 'Corso di cucina per cuochi', 55, 15, 500.00, 'Un corso ben strutturato con teoria e pratica. E\' una guida per acquisire le tecniche base di cucina e apprendere l\'aspetto merceologico degli alimenti, l\'organizzazione di una cucina e le sue figure professionali. Un corso ideato per permettere a tutti, in tempi ristretti, di conoscere attraverso l\'esecuzione di ricette base le nozioni fondamentali del cucinare, la costruzione di un menu e la presentazione del piatto. Ogni argomento verr‡ trattato con la massima cura e correlato da utili dispense, dalle paste alle verdure, dal pesce alla carne, dagli antipasti alla pasticceria e tante altre informazioni, tutte finalizzate a formare una valida figura professionale. Consegna dell\'attestato di partecipazione con valutazione. La Direzione si riserva, a suo insindacabile giudizio, di far frequentare agli allievi pi˘ meritevoli stages formativi gratuiti presso aziende della ristorazione.\r\n\r\nImportante!!!\r\nIl presente corso verr‡ erogato nel/i giorno/i\r\nindicato/i nel \"Calendario Corsi\" e osserver‡ la durata di quattro ore (ore 18.00-22.00) per ogni giorno indicato.\r\n\r\n');
+INSERT INTO `catalogo` (`id_corso`, `titolo`, `id_categoria`, `numeroMaxPartecipanti`, `costo`, `descrizione`) VALUES(95, 'Corso di cucina per cuochi', 55, 15, 500.00, 'Un corso ben strutturato con teoria e pratica. E\' una guida per acquisire le tecniche base di cucina e apprendere l\'aspetto merceologico degli alimenti, l\'organizzazione di una cucina e le sue figure professionali. Un corso ideato per permettere a tutti, in tempi ristretti, di conoscere attraverso l\'esecuzione di ricette base le nozioni fondamentali del cucinare, la costruzione di un menu e la presentazione del piatto. Ogni argomento verr√† trattato con la massima cura e correlato da utili dispense, dalle paste alle verdure, dal pesce alla carne, dagli antipasti alla pasticceria e tante altre informazioni, tutte finalizzate a formare una valida figura professionale. Consegna dell\'attestato di partecipazione con valutazione. La Direzione si riserva, a suo insindacabile giudizio, di far frequentare agli allievi pi√π meritevoli stages formativi gratuiti presso aziende della ristorazione.\r\n\r\nImportante!!!\r\nIl presente corso verr√† erogato nel/i giorno/i\r\nindicato/i nel \"Calendario Corsi\" e osserver√† la durata di quattro ore (ore 18.00-22.00) per ogni giorno indicato.\r\n\r\n');
 -- GO
 INSERT INTO `catalogo` (`id_corso`, `titolo`, `id_categoria`, `numeroMaxPartecipanti`, `costo`, `descrizione`) VALUES(96, 'Corso di cucina indiana', 54, 25, 750.00, 'Un corso da non perdere');
 -- GO
@@ -143,7 +140,7 @@ CREATE TABLE `categoria`
 	`id_categoria` integer (11) NOT NULL AUTO_INCREMENT , 
 	`descrizione` varchar (50),
 	PRIMARY KEY (`id_categoria`)
-) 
+) ;
 -- GO
 
 --
@@ -181,7 +178,7 @@ CREATE TABLE `feedback`
 	`descrizione` varchar (50), 
 	`voto` integer (11),
 	PRIMARY KEY (`id_feedback`)
-) 
+) ;
 -- GO
 
 --
@@ -222,7 +219,7 @@ CREATE TABLE `iscritti`
 	`id_edizione` integer (11) NOT NULL DEFAULT 0, 
 	`id_utente` varchar (50) NOT NULL,
 	PRIMARY KEY (`id_edizione`, `id_utente`)
-) 
+); 
 -- GO
 
 --
@@ -253,7 +250,7 @@ CREATE TABLE `mail`
 	`data` varchar (50), 
 	`body` varchar (200),
 	PRIMARY KEY (`id`)
-) 
+); 
 -- GO
 
 --
@@ -277,7 +274,7 @@ CREATE TABLE `registrati`
 	`email` varchar (50), 
 	`telefono` varchar (50),
 	PRIMARY KEY (`id_utente`)
-) 
+) ;
 -- GO
 
 --
