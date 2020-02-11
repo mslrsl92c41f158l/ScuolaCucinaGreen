@@ -36,7 +36,7 @@ public class RegistrazioneUtenteDAOImpl implements RegistrazioneUtenteDAO {
 		ps.setString(7, u.getTelefono());
 		ps.executeUpdate();
 	} 
-
+//ciao 
 	/*
 	 * modifica di tutti i dati di un utente
 	 * l'utente viene individuato dal suo idUtente
