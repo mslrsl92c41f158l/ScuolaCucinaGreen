@@ -12,4 +12,5 @@ public interface CategoriaDAO {
 	void delete(int idCategoria) throws SQLException;
 	Categoria select(int idCategoria) throws SQLException;
 	ArrayList<Categoria> select() throws SQLException;
+	void insert(Categoria cat) throws SQLException;
 }

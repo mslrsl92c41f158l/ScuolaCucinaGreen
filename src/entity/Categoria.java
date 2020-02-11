@@ -16,6 +16,7 @@ public class Categoria {
 		this.descrizione = descrizione;
 	}
 
+
 	public String getDescrizione() {
 		return descrizione;
 	}

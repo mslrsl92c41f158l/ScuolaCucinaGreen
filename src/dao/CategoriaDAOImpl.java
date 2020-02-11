@@ -1,10 +1,13 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import entity.Categoria;
+import entity.Utente;
 import exceptions.ConnessioneException;
 
 public class CategoriaDAOImpl implements CategoriaDAO {
@@ -21,7 +24,9 @@ public class CategoriaDAOImpl implements CategoriaDAO {
 	 */
 	@Override
 	public void insert(String descrizione) throws SQLException {
-		// TODO Auto-generated method stub
+		PreparedStatement ps=conn.prepareStatement("INSERT INTO categoria(descrizione) VALUES (?)");
+		ps.setString(1, descrizione);
+		ps.executeUpdate();
 		
 	}
 	/*
@@ -31,7 +36,11 @@ public class CategoriaDAOImpl implements CategoriaDAO {
 	 */
 	@Override
 	public void update(Categoria c) throws SQLException {
-		// TODO Auto-generated method stub
+		PreparedStatement ps=conn.prepareStatement("UPDATE categoria SET descrizione=?");
+		ps.setString(1, c.getDescrizione());
+		int n = ps.executeUpdate();
+		if(n==0)
+			throw new SQLException("categoria: " + c.getIdCategoria() + " non presente");
 		
 	}
 
@@ -42,7 +51,11 @@ public class CategoriaDAOImpl implements CategoriaDAO {
 	 */
 	@Override
 	public void delete(int idCategoria) throws SQLException {
-		// TODO Auto-generated method stub
+		PreparedStatement ps = conn.prepareStatement("DELETE FROM categoria WHERE id_categoria=?");
+		ps.setInt(1, idCategoria);
+		int n = ps.executeUpdate();
+		if(n==0)
+			throw new SQLException("categoria " + idCategoria + " non presente");
 		
 	}
 
@@ -52,8 +65,22 @@ public class CategoriaDAOImpl implements CategoriaDAO {
 	 */
 	@Override
 	public Categoria select(int idCategoria) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		PreparedStatement ps=conn.prepareStatement("SELECT * FROM categoria where id_categoria =?");
+
+		ps.setInt(1, idCategoria);
+
+		ResultSet rs = ps.executeQuery();
+		Categoria categoria=null;
+		if(rs.next()){
+			idCategoria = rs.getInt("id_categoria");
+			String descrizione = rs.getString("descrizione");
+			
+			categoria = new Categoria(idCategoria, descrizione);
+			return categoria;
+		}
+		else {
+			throw new SQLException("categoria: " + idCategoria + " non presente");			
+		}
 	}
 	
 	/*
@@ -65,5 +92,12 @@ public class CategoriaDAOImpl implements CategoriaDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public void insert(Categoria cat) throws SQLException {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }
