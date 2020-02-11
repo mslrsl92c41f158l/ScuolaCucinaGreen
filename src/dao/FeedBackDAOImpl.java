@@ -1,6 +1,7 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -21,7 +22,7 @@ public class FeedBackDAOImpl implements FeedbackDAO {
 	 */
 	@Override
 	public void insert(Feedback feedback) throws SQLException {
-		// TODO Auto-generated method stub
+		PreparedStatement ps=conn.prepareStatement("INSERT INTO feedback (id_feedback, id_edizione, id_utente, descrizione, voto)");
 
 	}
 

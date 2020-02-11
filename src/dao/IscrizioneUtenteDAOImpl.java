@@ -23,7 +23,7 @@ public class IscrizioneUtenteDAOImpl implements IscrizioneUtenteDAO {
 	 */
 	@Override
 	public void iscriviUtente(int idEdizione, String idUtente) throws SQLException {
-		// TODO Auto-generated method stub
+	
 
 	}
 

@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import entity.Edizione;
+import entity.Utente;
 import exceptions.ConnessioneException;
 import exceptions.DAOException;
 
@@ -46,7 +47,7 @@ public class CalendarioDAOImpl implements CalendarioDAO {
 	 */
 	@Override
 	public void delete(int idEdizione) throws SQLException{
-		// TODO Auto-generated method stub
+		
 				
 	}
 
@@ -230,8 +231,22 @@ public class CalendarioDAOImpl implements CalendarioDAO {
 	 */
 	@Override
 	public ArrayList<Edizione> select(java.util.Date da, java.util.Date a) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Edizione> edition = new ArrayList<Edizione>(); 
+
+		PreparedStatement ps=conn.prepareStatement("SELECT * FROM calendario");
+		ResultSet rs = ps.executeQuery();
+		while(rs.next()){
+			int idEdizione=rs.getInt("id_Edizione");
+			int idCorso=rs.getInt("id_corso");
+			Date dataInizio=rs.getDate("dataInizio");
+			int durata=rs.getInt("durata");
+			String aula=rs.getString("aula");
+			String docente=rs.getString("docente");
+			
+			Edizione e=new Edizione(idCorso,dataInizio,durata,aula,docente);
+			e.setCodice(idEdizione);
+		}
+		return edition;
 	}
 
 	/*
@@ -243,8 +258,23 @@ public class CalendarioDAOImpl implements CalendarioDAO {
 	 */
 	@Override
 	public ArrayList<Edizione> select(int idCaregotia, boolean future) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Edizione> edition = new ArrayList<Edizione>(); 
+
+		PreparedStatement ps=conn.prepareStatement("SELECT * FROM calendario");
+		ResultSet rs = ps.executeQuery();
+		while(rs.next()){
+			int idEdizione=rs.getInt("id_Edizione");
+			int idCorso=rs.getInt("id_corso");
+			Date dataInizio=rs.getDate("dataInizio");
+			int durata=rs.getInt("durata");
+			String aula=rs.getString("aula");
+			String docente=rs.getString("docente");
+			Edizione e=new Edizione(idCorso,dataInizio,durata,aula,docente);
+			e.setCodice(idEdizione);
+		
+		}
+		return edition;
+		
 	}
 
 	/*
@@ -255,8 +285,21 @@ public class CalendarioDAOImpl implements CalendarioDAO {
 	 */
 	@Override
 	public ArrayList<Edizione> select(boolean future) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Edizione> edition = new ArrayList<Edizione>(); 
+
+		PreparedStatement ps=conn.prepareStatement("SELECT * FROM calendario");
+		ResultSet rs = ps.executeQuery();
+		while(rs.next()){
+			int idEdizione=rs.getInt("id_Edizione");
+			int idCorso=rs.getInt("id_corso");
+			Date dataInizio=rs.getDate("dataInizio");
+			int durata=rs.getInt("durata");
+			String aula=rs.getString("aula");
+			String docente=rs.getString("docente");
+			Edizione e=new Edizione(idCorso,dataInizio,durata,aula,docente);
+			e.setCodice(idEdizione);
+		}
+		return edition;
 	}
 
 	/*
@@ -268,7 +311,20 @@ public class CalendarioDAOImpl implements CalendarioDAO {
 	 */
 	@Override
 	public ArrayList<Edizione> select(String idUtente, boolean future) throws SQLException {
-		// TODO Auto-generated method stub
+		ArrayList<Edizione> edition = new ArrayList<Edizione>(); 
+
+		PreparedStatement ps=conn.prepareStatement("SELECT * FROM calendario");
+		ResultSet rs = ps.executeQuery();
+		while(rs.next()){
+			int idEdizione=rs.getInt("id_Edizione");
+			int idCorso=rs.getInt("id_corso");
+			Date dataInizio=rs.getDate("dataInizio");
+			int durata=rs.getInt("durata");
+			String aula=rs.getString("aula");
+			String docente=rs.getString("docente");
+			Edizione e=new Edizione(idCorso,dataInizio,durata,aula,docente);
+			e.setCodice(idEdizione);
+		}	
 		return null;
 	}
 }
