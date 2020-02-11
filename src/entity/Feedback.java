@@ -22,6 +22,7 @@ public class Feedback {
 		this.voto = voto;
 		this.idUtente=idUtente;
 	}
+	
 	public int getIdEdizione() {
 		return idEdizione;
 	}

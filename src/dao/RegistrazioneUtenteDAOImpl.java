@@ -35,6 +35,7 @@ public class RegistrazioneUtenteDAOImpl implements RegistrazioneUtenteDAO {
 		ps.setString(6, u.getEmail());
 		ps.setString(7, u.getTelefono());
 		ps.executeUpdate();
+		
 	} 
  
 	/*
@@ -116,7 +117,7 @@ public class RegistrazioneUtenteDAOImpl implements RegistrazioneUtenteDAO {
 		ResultSet rs = ps.executeQuery();
 		Utente registrato =null;
 		if(rs.next()){
-			 idUtente = rs.getString("id_utente");
+			idUtente = rs.getString("id_utente");
 			String password= rs.getString("password");
 			String nome= rs.getString("nome");
 			String cognome= rs.getString("cognome");
