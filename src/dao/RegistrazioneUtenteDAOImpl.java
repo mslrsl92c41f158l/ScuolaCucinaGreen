@@ -81,13 +81,13 @@ public class RegistrazioneUtenteDAOImpl implements RegistrazioneUtenteDAO {
 	public ArrayList<Utente> select() throws SQLException {
 		// TODO Auto-generated method stub
 		
-		ArrayList<Utente> amministratori = new ArrayList<Utente>(); 
+		ArrayList<Utente> registrati = new ArrayList<Utente>(); 
 
-		PreparedStatement ps=conn.prepareStatement("SELECT * FROM amministratori");
+		PreparedStatement ps=conn.prepareStatement("SELECT * FROM registrati");
 
 		ResultSet rs = ps.executeQuery();
 		while(rs.next()){
-			String idUtente = rs.getString("id_amministratore");
+			String idUtente = rs.getString("id_utente");
 			String password= rs.getString("password");
 			String nome= rs.getString("nome");
 			String cognome= rs.getString("cognome");
@@ -95,12 +95,12 @@ public class RegistrazioneUtenteDAOImpl implements RegistrazioneUtenteDAO {
 			String email= rs.getString("email");
 			String telefono= rs.getString("telefono");
 
-			Utente amministratore = new Utente(idUtente,password,nome,cognome,dataNascita,email,telefono, true);
-			amministratori.add(amministratore);
+			Utente registrato = new Utente(idUtente,password,nome,cognome,dataNascita,email,telefono, true);
+			registrati.add(registrato);
 		
 		
 		}
-		return amministratori;
+		return registrati;
 		}
 
 	
