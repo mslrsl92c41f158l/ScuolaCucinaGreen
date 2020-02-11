@@ -110,8 +110,28 @@ public class RegistrazioneUtenteDAOImpl implements RegistrazioneUtenteDAO {
 	 */
 	@Override
 	public Utente select(String idUtente) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		PreparedStatement ps=conn.prepareStatement("SELECT * FROM registrati where id_utente =?");
+
+		ps.setString(1, idUtente);
+
+		ResultSet rs = ps.executeQuery();
+		Utente registrato =null;
+		if(rs.next()){
+			 idUtente = rs.getString("id_utente");
+			String password= rs.getString("password");
+			String nome= rs.getString("nome");
+			String cognome= rs.getString("cognome");
+			Date dataNascita = rs.getDate("dataNascita");
+			String email= rs.getString("email");
+			String telefono= rs.getString("telefono");
+
+			registrato = new Utente(idUtente,password,nome,cognome,dataNascita,email,telefono, true);
+			return registrato;
+		}
+		else {
+			throw new SQLException("amministratore: " + idUtente + " non presente");			
+		}
+		
 	}
 
 }
