@@ -74,7 +74,7 @@ public class FeedBackDAOImpl implements FeedbackDAO {
 	 * lettura di un singolo feedback scritto da un utente per una certa edizione se
 	 * il feedback non esiste si solleva una eccezione
 	 */
-	// @Override tolto
+	@Override 
 	public Feedback selectSingoloFeedback(String idUtente, int idEdizione) throws SQLException {
 		PreparedStatement ps = conn.prepareStatement("SELECT * FROM feedback WHERE id_utente = ? AND id_edizione = ?");
 		ps.setString(1, idUtente);
@@ -134,9 +134,7 @@ public class FeedBackDAOImpl implements FeedbackDAO {
 		PreparedStatement ps = conn.prepareStatement("SELECT * FROM feedback WHERE id_utente = ?");
 
 		ResultSet rs = ps.executeQuery();
-		if (rs == null || idUtente == null) {
-			return feedback;
-		}
+
 		while (rs.next()) {
 			idUtente = rs.getString("id_utente");
 			int idEdizione = rs.getInt("id_edizione");
@@ -162,9 +160,6 @@ public class FeedBackDAOImpl implements FeedbackDAO {
 				"SELECT id_corso, titolo, f.descrizione, voto FROM CATALOGO JOIN calendario using ( id_corso) join feedback f using (id_edizione)");
 
 		ResultSet rs = ps.executeQuery();
-		if (rs == null || idCorso == 0) {
-			return feedback;
-		}
 
 		while (rs.next()) {
 			idCorso = rs.getInt("id_corso");
@@ -178,10 +173,6 @@ public class FeedBackDAOImpl implements FeedbackDAO {
 		return feedback;
 	}
 
-	@Override
-	public Feedback selectSingoloFeedback(int idUtente, int idEdizione) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 }

@@ -31,7 +31,11 @@ public class Edizione {
 		this.aula = aula;
 		this.docente = docente;
 	}
-	
+
+	public Edizione(int idEdizione) {
+		this.idEdizione = idEdizione;
+	}
+
 	public Corso getCorso() {
 		return corso;
 	}

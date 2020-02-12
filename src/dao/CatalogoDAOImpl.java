@@ -83,9 +83,7 @@ public class CatalogoDAOImpl implements CatalogoDAO {
 		PreparedStatement ps=conn.prepareStatement("SELECT * FROM catalogo");
 
 		ResultSet rs = ps.executeQuery();
-		if (rs==null) {
-		   return catalogo;
-		}
+		
 		while(rs.next()){
 			int codice = rs.getInt("id_corso");
 			String titolo= rs.getString("titolo");

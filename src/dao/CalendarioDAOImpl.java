@@ -47,7 +47,7 @@ public class CalendarioDAOImpl implements CalendarioDAO {
 	 */
 	@Override
 	public void delete(int idEdizione) throws SQLException{
-		
+		// todo
 				
 	}
 
@@ -81,31 +81,17 @@ public class CalendarioDAOImpl implements CalendarioDAO {
 	@Override
 	public ArrayList<Edizione> select(int idCaregotia) throws SQLException{
 			ArrayList<Edizione> edizioni=new ArrayList<Edizione>();
-			PreparedStatement ps=conn.prepareStatement("select * from calendario, catalogo where calendario.id_corso = catalogo.id_corso and id_categoria=?");
-
+			PreparedStatement ps=conn.prepareStatement("SELECT id_edizione FROM calendario join categoria CAT where id_categoria = ?"); 
+			// se c'è tempo inserire  tutte le colonne come da costruttore.
 			ps.setInt(1, idCaregotia);
+
 			ResultSet rs=ps.executeQuery();
+		
 			while(rs.next()){
-				int idEdizione=rs.getInt("id_Edizione");
-				int idCorso=rs.getInt("id_corso");
-				Date dataInizio=rs.getDate("dataInizio");
-				int durata=rs.getInt("durata");
-				String aula=rs.getString("aula");
-				String docente=rs.getString("docente");
+				int idEdizione=rs.getInt("id_edizione");
 
-				Edizione e=new Edizione(idCorso,dataInizio,durata,aula,docente);
-				e.setCodice(idEdizione);
-
-				long dataM = dataInizio.getTime();
-				long durataM= durata*86400000L;
-				Date dataFine = new Date(dataM+durataM);
-			
-
-				if (dataFine.before(new java.util.Date()))
-					e.setTerminata(true);	
-
-				edizioni.add(e);
-
+				Edizione edizione =new Edizione(idEdizione);
+				edizioni.add(edizione);
 			}
 
 			return edizioni;
