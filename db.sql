@@ -214,9 +214,12 @@ ALTER TABLE `cucina`.`feedback` ADD INDEX dellUtente (id_utente );
 drop table if exists iscritti;
 CREATE TABLE iscritti 
 (
-	id_edizione integer NOT NULL DEFAULT 0 references calendario(id_edizione) on delete cascade, 
-	id_utente varchar (50) NOT NULL references registrati(id_utente),
-	PRIMARY KEY (id_edizione, id_utente) 
+	id_edizione integer NOT NULL DEFAULT 0, 
+	id_utente varchar (50) NOT NULL,
+	PRIMARY KEY (id_edizione, id_utente),
+    constraint iscritti_edizione_fk foreign key (id_edizione) references calendario(id_edizione) on delete cascade,
+    constraint iscritti_utente_fk foreign key (id_utente) references registrati(id_utente)
+    
 ); 
 
 --
