@@ -1,6 +1,7 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -89,8 +90,23 @@ public class CategoriaDAOImpl implements CategoriaDAO {
 	 */
 	@Override
 	public ArrayList<Categoria> select() throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Categoria> categorie = new ArrayList<Categoria>(); 
+
+		PreparedStatement ps=conn.prepareStatement("SELECT * FROM categoria");
+
+		ResultSet rs = ps.executeQuery();
+		if(rs==null) {
+			return categorie;
+		}
+		while(rs.next()){
+			int idCategoria = rs.getInt("id_categoria");
+			String descrizione= rs.getString("descrizione");
+			
+			Categoria categoria = new Categoria (idCategoria,descrizione);
+			categorie.add(categoria);
+		}
+
+		return categorie;
 	}
 
 	@Override
