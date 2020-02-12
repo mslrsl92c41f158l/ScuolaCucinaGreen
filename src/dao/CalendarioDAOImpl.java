@@ -47,7 +47,12 @@ public class CalendarioDAOImpl implements CalendarioDAO {
 	 */
 	@Override
 	public void delete(int idEdizione) throws SQLException{
-		// todo
+		PreparedStatement ps=conn.prepareStatement("delete from calendario where id_edizione = ?");
+		
+		ps.setInt(1, idEdizione);
+		int n = ps.executeUpdate();
+		if(n==0)
+			throw new SQLException("Edizione " + idEdizione + " non presente");
 				
 	}
 

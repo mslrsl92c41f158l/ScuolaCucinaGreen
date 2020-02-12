@@ -1,6 +1,5 @@
 -- create user green identified by 'password';
 -- grant all privileges on cucina.* to green;
-
 -- create schema cucina;
 
 use cucina;
@@ -13,6 +12,8 @@ SET FOREIGN_KEY_CHECKS=0;
 --
 -- Table: amministratori
 --
+drop table if exists amministratori;
+
 CREATE TABLE `amministratori` 
 (
 	`id_amministratore` varchar (50) NOT NULL, 
@@ -24,23 +25,17 @@ CREATE TABLE `amministratori`
 	`telefono` varchar (50),
 	PRIMARY KEY (`id_amministratore`)
 ); 
--- GO
 
---
--- Dumping Table Data: amministratori
---
-BEGIN;
--- GO
+-- Table Data: amministratori
+
 INSERT INTO `amministratori` (`id_amministratore`, `password`, `nome`, `cognome`, `dataNascita`, `email`, `telefono`) VALUES('idutente', 'password', 'Admin', 'Bianchi', '1975-02-25', 'administratorSC@gmail.com', '3331234567');
--- GO
 INSERT INTO `amministratori` (`id_amministratore`, `password`, `nome`, `cognome`, `dataNascita`, `email`, `telefono`) VALUES('marco81', 'marco', 'Marco', 'Rossi', '1957-11-22', 'admScuolaCucina@tiscali.it', '3332456178');
--- GO
 COMMIT;
--- GO
 
 --
 -- Table: calendario
 --
+drop table if exists calendario;
 CREATE TABLE `calendario` 
 (
 	`id_edizione` integer (11) NOT NULL AUTO_INCREMENT , 
@@ -51,7 +46,6 @@ CREATE TABLE `calendario`
 	`docente` varchar (50),
 	PRIMARY KEY (`id_edizione`)
 ); 
--- GO
 
 --
 -- Dumping Table Data: calendario
@@ -88,6 +82,7 @@ ALTER TABLE `cucina`.`calendario` ADD INDEX delCorso (id_corso );
 --
 -- Table: catalogo
 --
+drop table if exists catalogo;
 CREATE TABLE `catalogo` 
 (
 	`id_corso` integer (11) NOT NULL AUTO_INCREMENT , 
@@ -135,6 +130,7 @@ ALTER TABLE `cucina`.`catalogo` ADD INDEX categoriaDelCorso (id_categoria );
 --
 -- Table: categoria
 --
+drop table if exists categoria;
 CREATE TABLE `categoria` 
 (
 	`id_categoria` integer (11) NOT NULL AUTO_INCREMENT , 
@@ -169,15 +165,17 @@ COMMIT;
 
 --
 -- Table: feedback
---
-CREATE TABLE `feedback` 
+drop table if exists feedback;
+CREATE TABLE feedback 
 (
-	`id_feedback` integer (11) NOT NULL AUTO_INCREMENT , 
-	`id_edizione` integer (11), 
+	`id_feedback` integer NOT NULL AUTO_INCREMENT, 
+	id_edizione integer, 
 	`id_utente` varchar (50) NOT NULL, 
 	`descrizione` varchar (50), 
-	`voto` integer (11),
-	PRIMARY KEY (`id_feedback`)
+	`voto` integer,
+	PRIMARY KEY (`id_feedback`),
+    
+    constraint feedback_edizione_fk foreign key (id_edizione) references calendario(id_edizione) on delete cascade
 ) ;
 -- GO
 
@@ -213,14 +211,13 @@ ALTER TABLE `cucina`.`feedback` ADD INDEX dellUtente (id_utente );
 
 --
 -- Table: iscritti
---
-CREATE TABLE `iscritti` 
+drop table if exists iscritti;
+CREATE TABLE iscritti 
 (
-	`id_edizione` integer (11) NOT NULL DEFAULT 0, 
-	`id_utente` varchar (50) NOT NULL,
-	PRIMARY KEY (`id_edizione`, `id_utente`)
+	id_edizione integer NOT NULL DEFAULT 0 references calendario(id_edizione) on delete cascade, 
+	id_utente varchar (50) NOT NULL references registrati(id_utente),
+	PRIMARY KEY (id_edizione, id_utente) 
 ); 
--- GO
 
 --
 -- Dumping Table Data: iscritti
@@ -242,7 +239,7 @@ ALTER TABLE `cucina`.`iscritti` ADD INDEX utenteIscritto (id_utente );
 
 --
 -- Table: mail
---
+drop table if exists mail;
 CREATE TABLE `mail` 
 (
 	`id` integer (11) NOT NULL AUTO_INCREMENT , 
@@ -263,7 +260,7 @@ COMMIT;
 
 --
 -- Table: registrati
---
+drop table if exists registrati;
 CREATE TABLE `registrati` 
 (
 	`id_utente` varchar (50) NOT NULL, 
@@ -326,20 +323,8 @@ ALTER TABLE `feedback` ADD CONSTRAINT dellUtente FOREIGN KEY (id_utente) REFEREN
 --
 -- Foreign Key Constraint: dellEdizione
 --
-ALTER TABLE `feedback` ADD CONSTRAINT dellEdizione FOREIGN KEY (id_edizione) REFERENCES `calendario`(id_edizione);
--- GO
 
---
--- Foreign Key Constraint: utenteIscritto
---
-ALTER TABLE `iscritti` ADD CONSTRAINT utenteIscritto FOREIGN KEY (id_utente) REFERENCES `registrati`(id_utente);
--- GO
 
---
--- Foreign Key Constraint: allEdizione
---
-ALTER TABLE `iscritti` ADD CONSTRAINT allEdizione FOREIGN KEY (id_edizione) REFERENCES `calendario`(id_edizione);
--- GO
 
 --
 -- Dumping Triggers

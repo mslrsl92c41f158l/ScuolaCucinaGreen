@@ -90,8 +90,26 @@ public class IscrizioneUtenteDAOImpl implements IscrizioneUtenteDAO {
 	 */
 	@Override
 	public ArrayList<Utente> selectUtentiPerEdizione(int idEdizione) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Utente> utenti = new ArrayList<Utente>();
+
+		PreparedStatement ps = conn.prepareStatement("SELECT id_utente, password, nome, cognome, dataNascita, email, telefono FROM registrati JOIN iscritti USING (id_utente) WHERE id_edizione = ?");
+
+		ResultSet rs = ps.executeQuery();
+
+		while (rs.next()) {
+			String idUtente = rs.getString("id_utente");
+		    String password = rs.getString ("password");
+			String nome = rs.getString("nome");
+			String cognome= rs.getString("cognome");
+			Date dataNascita = rs.getDate("dataNascita");
+			String email = rs.getString("email");
+			String telefono = rs.getString("telefono");
+			
+			Utente utente = new Utente(idUtente, password, nome, cognome, dataNascita,  email,  telefono, false);			
+			
+			utenti.add(utente);
+		}
+		return utenti;
 	}
 
 	/*
@@ -99,8 +117,11 @@ public class IscrizioneUtenteDAOImpl implements IscrizioneUtenteDAO {
 	 */
 	@Override
 	public int getNumeroIscritti(int idEdizione) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
+		PreparedStatement ps = conn.prepareStatement("SELECT COUNT(id_utente) FROM iscritti WHERE id_edizione = ?");
+		
+		ResultSet rs = ps.executeQuery();
+		rs.next();
+		return rs.getInt(1);
 	}
 
 }
