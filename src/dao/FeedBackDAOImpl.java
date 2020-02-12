@@ -43,8 +43,8 @@ public class FeedBackDAOImpl implements FeedbackDAO {
 	 */
 	@Override
 	public void update(Feedback feedback) throws SQLException {
-		PreparedStatement ps = conn
-				.prepareStatement("INSERT INTO feedback (id_feedback, id_edizione, id_utente, descrizione, voto)");
+		PreparedStatement ps = conn.prepareStatement(
+				"UPDATE feedback SET id_feedback =?, id_edizione= ?, id_utente=?, descrizione=?, voto=?");
 
 		ps.setInt(1, feedback.getIdFeedback());
 		ps.setInt(2, feedback.getIdEdizione());
@@ -62,8 +62,8 @@ public class FeedBackDAOImpl implements FeedbackDAO {
 	 */
 	@Override
 	public void delete(int idFeedback) throws SQLException {
-		PreparedStatement ps = conn
-				.prepareStatement("INSERT INTO feedback (id_feedback, id_edizione, id_utente, descrizione, voto)");
+		PreparedStatement ps = conn.prepareStatement(
+				"DELETE FROM feedback WHERE(id_feedback =?, id_edizione= ?, id_utente=?, descrizione=?, voto=?)");
 		ps.setInt(1, idFeedback);
 		int n = ps.executeUpdate();
 		if (n == 0)
@@ -74,22 +74,22 @@ public class FeedBackDAOImpl implements FeedbackDAO {
 	 * lettura di un singolo feedback scritto da un utente per una certa edizione se
 	 * il feedback non esiste si solleva una eccezione
 	 */
-	@Override
-	public Feedback selectSingoloFeedback(int idUtente, int idEdizione) throws SQLException {
+	// @Override tolto
+	public Feedback selectSingoloFeedback(String idUtente, int idEdizione) throws SQLException {
 		PreparedStatement ps = conn.prepareStatement("SELECT * FROM feedback WHERE id_utente = ? AND id_edizione = ?");
-		ps.setInt(1, idUtente);
+		ps.setString(1, idUtente);
 		ps.setInt(2, idEdizione);
 		ResultSet rs = ps.executeQuery();
 		Feedback feed = null;
 		if (rs.next()) {
-			idUtente = rs.getInt("id_utente");
+			idUtente = rs.getString("id_utente");
 			idEdizione = rs.getInt("id_edizione");
 			String descrizione = rs.getString("descrizione");
 			int voto = rs.getInt("voto");
 
-//			feed = new Feedback(idEdizione, idUtente, descrizione, voto);
-//			return feed;
-			return null; // TODO: fix!
+			feed = new Feedback(idEdizione, idUtente, descrizione, voto);
+			return feed;
+
 		} else {
 			throw new SQLException("feedback di " + idUtente + "di " + idEdizione + " non presente");
 
@@ -102,8 +102,25 @@ public class FeedBackDAOImpl implements FeedbackDAO {
 	 */
 	@Override
 	public ArrayList<Feedback> selectPerEdizione(int idEdizione) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+
+		ArrayList<Feedback> feedback = new ArrayList<Feedback>();
+
+		PreparedStatement ps = conn.prepareStatement("SELECT * FROM feedback WHERE id_edizione = ?");
+
+		ResultSet rs = ps.executeQuery();
+		if (rs == null || idEdizione == 0) {
+			return feedback;
+		}
+		while (rs.next()) {
+			String idUtente = rs.getString("id_utente");
+			idEdizione = rs.getInt("id_edizione");
+			String descrizione = rs.getString("descrizione");
+			int voto = rs.getInt("voto");
+
+			Feedback feed = new Feedback(idEdizione, idUtente, descrizione, voto);
+			feedback.add(feed);
+		}
+		return feedback;
 	}
 
 	/*
@@ -112,8 +129,24 @@ public class FeedBackDAOImpl implements FeedbackDAO {
 	 */
 	@Override
 	public ArrayList<Feedback> selectPerUtente(String idUtente) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Feedback> feedback = new ArrayList<Feedback>();
+
+		PreparedStatement ps = conn.prepareStatement("SELECT * FROM feedback WHERE id_utente = ?");
+
+		ResultSet rs = ps.executeQuery();
+		if (rs == null || idUtente == null) {
+			return feedback;
+		}
+		while (rs.next()) {
+			idUtente = rs.getString("id_utente");
+			int idEdizione = rs.getInt("id_edizione");
+			String descrizione = rs.getString("descrizione");
+			int voto = rs.getInt("voto");
+
+			Feedback feed = new Feedback(idEdizione, idUtente, descrizione, voto);
+			feedback.add(feed);
+		}
+		return feedback;
 	}
 
 	/*
@@ -122,6 +155,31 @@ public class FeedBackDAOImpl implements FeedbackDAO {
 	 */
 	@Override
 	public ArrayList<Feedback> selectFeedbackPerCorso(int idCorso) throws SQLException {
+
+		ArrayList<Feedback> feedback = new ArrayList<Feedback>();
+
+		PreparedStatement ps = conn.prepareStatement(
+				"SELECT id_corso, titolo, f.descrizione, voto FROM CATALOGO JOIN calendario using ( id_corso) join feedback f using (id_edizione)");
+
+		ResultSet rs = ps.executeQuery();
+		if (rs == null || idCorso == 0) {
+			return feedback;
+		}
+
+		while (rs.next()) {
+			idCorso = rs.getInt("id_corso");
+			String titolo = rs.getString("titolo");
+			String descrizione = rs.getString("descrizione");
+			int voto = rs.getInt("voto");
+
+			Feedback feed = new Feedback(idCorso, titolo, descrizione, voto);
+			feedback.add(feed);
+		}
+		return feedback;
+	}
+
+	@Override
+	public Feedback selectSingoloFeedback(int idUtente, int idEdizione) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}
