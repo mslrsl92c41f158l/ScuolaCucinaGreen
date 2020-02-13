@@ -134,10 +134,12 @@ public class UtenteServiceImpl implements UtenteService {
 	public void modificaFeedback(Feedback feedback) throws DAOException {
 		// TODO Auto-generated method stub
 		try {
+			if (... && daoF.selectEndDate(rs.getIdCorso()) {
 		
-			daoF.update(feedback.getVoto());
-		  	daoF.update(feedback.getDescrizione());
-
+				daoF.update(feedback.getVoto());
+		  		daoF.update(feedback.getDescrizione());
+			} else {
+				throw new DAOException("Impossibile modificare");
 			
 		} catch (SQLException e) {
 			throw new DAOException("", e);
@@ -153,11 +155,14 @@ public class UtenteServiceImpl implements UtenteService {
 	 * eccezione
 	 */
 	@Override
-	public void cancellaFeedback(int idFeedback) throws DAOException {
+	public void cancellaFeedback(int idFeedback, int IdCorso) throws DAOException {
 		// TODO Auto-generated method stub
 		try {
-			
-			daoF.delete(idFeedback);
+			if(daoF.selectEndDate(IdCorso)) {
+				daoF.delete(idFeedback);
+			} else {
+				throw new DAOException("Fuori tempo massimo");
+			}
 		} catch (SQLException e) {
 			throw new DAOException("", e);
 		}
@@ -166,6 +171,12 @@ public class UtenteServiceImpl implements UtenteService {
 
 	@Override
 	public void modificaFeedback(Feedback feedback) throws DAOException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void cancellaFeedback(int idFeedback) throws DAOException {
 		// TODO Auto-generated method stub
 		
 	}

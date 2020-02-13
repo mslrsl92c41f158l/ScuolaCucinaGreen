@@ -1,5 +1,6 @@
 package dao;
 
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import entity.Feedback;
@@ -14,6 +15,7 @@ public interface FeedbackDAO {
 	ArrayList<Feedback> selectPerEdizione(int idEdizione) throws SQLException;
 	ArrayList<Feedback> selectPerUtente(String idUtente) throws SQLException;
 	ArrayList<Feedback> selectFeedbackPerCorso(int idCorso) throws SQLException;
+	boolean selectEndDate(int IdCorso) throws SQLException;
 	
 
 }
