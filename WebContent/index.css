@@ -1,0 +1,45 @@
+@charset "ISO-8859-1";
+
+body{
+	height:100%;
+}
+#spacemore{
+		margin-left: 100em;
+}
+
+#navbar{ 
+		background-color: #c3e6cb;
+		}
+.nav-link{
+	color: #155724;
+}
+.nav-link:hover{
+	color: #153224;
+}
+
+#imgbackground {
+width: 100%; height: 100%; top: 0; left: 0;
+background: url(https://cdn.pixabay.com/photo/2016/12/26/17/28/food-1932466_960_720.jpg) no-repeat center top; position: fixed; z-index: -1;
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;
+}
+
+h1{ font-size: 120px;
+	color: white;
+	text-align:left; 
+    padding-left:100px;
+    padding-top: 200px;
+    font-family: "Harrington";
+    
+}
+#bottone{
+	margin-left:100px;
+	margin-top: 50px;
+}
+
+footer{
+	color:white;
+	padding-top:370px;
+}
