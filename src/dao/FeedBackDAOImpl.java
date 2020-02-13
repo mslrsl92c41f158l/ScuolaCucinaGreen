@@ -27,7 +27,7 @@ public class FeedBackDAOImpl implements FeedbackDAO {
 	@Override
 	public void insert(Feedback feedback) throws SQLException {
 		PreparedStatement ps = conn
-				.prepareStatement("INSERT INTO feedback (id_feedback, id_edizione, id_utente, descrizione, voto)");
+				.prepareStatement("INSERT INTO feedback (id_feedback, id_edizione, id_utente, descrizione, voto) VALUES (?,?,?,?,?)");
 
 		ps.setString(1, feedback.getIdUtente());
 		ps.setInt(2, feedback.getIdFeedback());
@@ -63,7 +63,7 @@ public class FeedBackDAOImpl implements FeedbackDAO {
 	@Override
 	public void delete(int idFeedback) throws SQLException {
 		PreparedStatement ps = conn.prepareStatement(
-				"DELETE FROM feedback WHERE(id_feedback =?, id_edizione= ?, id_utente=?, descrizione=?, voto=?)");
+				"DELETE FROM feedback WHERE id_feedback = ?");
 		ps.setInt(1, idFeedback);
 		int n = ps.executeUpdate();
 		if (n == 0)

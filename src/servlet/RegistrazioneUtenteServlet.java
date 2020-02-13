@@ -29,20 +29,18 @@ public class RegistrazioneUtenteServlet extends HttpServlet {
 
 		//invocazione al validatore per il controllo dei campi
 		List<ErroreValidazione> lista = Validatore.validazioneUtente(request);
-		if(lista.size()!=0){
-			request.setAttribute("lista", lista );
+		if (lista.size() != 0) {
+			request.setAttribute("lista", lista);
 			getServletContext().getRequestDispatcher("/WEB-INF/jsp/registraUtente.jsp").forward(request, response);
 		}
 
-		UtenteService serviceU;
 		try {
-			serviceU = new UtenteServiceImpl();
+			UtenteService service = new UtenteServiceImpl();
 
-			Utente u = this.getUtenteFromQueryString(request);
+			Utente utente = makeUtente(request);
 
-
-			serviceU.registrazioneUtente(u);
-			request.setAttribute("user", u);
+			service.registrazioneUtente(utente);
+			request.setAttribute("user", utente);
 			getServletContext().getRequestDispatcher("/WEB-INF/jsp/registrazioneUtenteOk.jsp").forward(request, response);
 
 		} catch (DAOException | ConnessioneException e) {
@@ -53,7 +51,7 @@ public class RegistrazioneUtenteServlet extends HttpServlet {
 
 	}
 
-	private Utente getUtenteFromQueryString(HttpServletRequest request){
+	private Utente makeUtente(HttpServletRequest request){
 
 		String idUtente = request.getParameter("idUtente");
 		String password = request.getParameter("password");
@@ -70,9 +68,6 @@ public class RegistrazioneUtenteServlet extends HttpServlet {
 		boolean adm = false;
 
 		return new Utente(idUtente, password, nome, cognome, d, email, telefono, adm);
-
-
-
 	}
 
 }

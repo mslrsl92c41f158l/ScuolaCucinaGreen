@@ -129,7 +129,7 @@ public class RegistrazioneUtenteDAOImpl implements RegistrazioneUtenteDAO {
 			return registrato;
 		}
 		else {
-			throw new SQLException("amministratore: " + idUtente + " non presente");			
+			throw new SQLException("Utente: " + idUtente + " non presente");			
 		}
 		
 	}
