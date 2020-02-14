@@ -51,7 +51,7 @@ public class UtenteServiceImpl implements UtenteService {
 	public Utente checkCredenziali(String idUtente, String psw) throws DAOException {
 		try {
 			Utente u = daoU.select(idUtente);
-			if (!u.getPassword().equals(psw)) {
+			if (u.getPassword().equals(psw)) {
 				return u;
 			}
 			throw new DAOException("Password errata");
@@ -132,15 +132,15 @@ public class UtenteServiceImpl implements UtenteService {
 	 */
 	@Override
 	public void modificaFeedback(Feedback feedback) throws DAOException {
-		// TODO Auto-generated method stub
 		try {
-			daoF.updateSingoloFeedback(feedback.getDescrizione(), feedback.getVoto(), feedback.getIdFeedback(), feedback.getIdEdizione());
+			daoF.updateSingoloFeedback(feedback.getDescrizione(), feedback.getVoto(), feedback.getIdFeedback(),
+					feedback.getIdEdizione());
 		} catch (SQLException e) {
 			throw new DAOException("Impossibile modificare il feedback", e);
 
 		}
 
-	} 
+	}
 
 	/*
 	 * eliminazione di un feedback il feedback è cancellabile solo da parte
@@ -159,7 +159,16 @@ public class UtenteServiceImpl implements UtenteService {
 
 	}
 
-	
-	
-	
+	@Override
+	public Utente getUtente(String idUtente, String password) throws DAOException {
+		try {
+			Utente utente = this.checkCredenziali(idUtente, password);
+			// utente = daoU.selectUtente(idUtente);
+			return utente;
+		} catch (DAOException e) {
+			throw new DAOException("Feedback non più eliminabile", e);
+
+		}
+		
+	}
 }

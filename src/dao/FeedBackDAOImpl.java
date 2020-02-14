@@ -132,9 +132,9 @@ public class FeedBackDAOImpl implements FeedbackDAO {
 		ps.setInt(1, idFeedback);
 		ps.setInt(2, idEdizione);
 		int n = ps.executeUpdate();
-		if (n == 0)
+		if (n == 0) {
 			throw new SQLException("feedback: " + idFeedback + " non presente/non eliminabile");
-
+		}
 	}
 	/*
 	 * lettura di tutti i feedback di una certa edizione se non ci sono feedback o

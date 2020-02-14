@@ -16,5 +16,6 @@ public interface UtenteService {
 	void inserisciFeedback(Feedback f) throws DAOException;
 	void modificaFeedback(Feedback feedback) throws DAOException;
 	void cancellaFeedback(int idFeedback, int idEdizione) throws DAOException;
+	public Utente getUtente(String idUtente, String password) throws DAOException;
 	
 }

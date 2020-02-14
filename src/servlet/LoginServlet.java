@@ -8,6 +8,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import entity.Utente;
+import exceptions.ConnessioneException;
+import exceptions.DAOException;
+import service.UtenteService;
+import service.UtenteServiceImpl;
+
 /**
  * Servlet implementation class Login
  */
@@ -28,11 +34,19 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		String user = request.getParameter("user");
-		HttpSession session = request.getSession();
-		session.setAttribute("user", user);
+		try {
+		UtenteService service = new UtenteServiceImpl();
 		
+		String user = request.getParameter("user");
+		String pw = request.getParameter("pw");
+		Utente utente = service.checkCredenziali(user, pw);
+		//metodo 
+		HttpSession session = request.getSession();
+		session.setAttribute("utente", utente);
+		
+		} catch (DAOException | ConnessioneException e) {
+			// pagina login non riuscito
+		}
 		
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}

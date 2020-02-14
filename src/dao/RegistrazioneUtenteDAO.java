@@ -11,5 +11,6 @@ public interface RegistrazioneUtenteDAO {
 	void delete(String idUtente) throws SQLException;
 	ArrayList<Utente> select() throws SQLException;
 	Utente select(String idUtente) throws SQLException;
+	Utente selectUtente(String idUtente) throws SQLException;
 
 }
