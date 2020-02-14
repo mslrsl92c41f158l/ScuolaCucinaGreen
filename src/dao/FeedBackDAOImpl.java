@@ -5,6 +5,9 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.chrono.ChronoLocalDate;
 import java.util.ArrayList;
 
 import entity.Feedback;
@@ -26,8 +29,8 @@ public class FeedBackDAOImpl implements FeedbackDAO {
 	 */
 	@Override
 	public void insert(Feedback feedback) throws SQLException {
-		PreparedStatement ps = conn
-				.prepareStatement("INSERT INTO feedback (id_feedback, id_edizione, id_utente, descrizione, voto) VALUES (?,?,?,?,?)");
+		PreparedStatement ps = conn.prepareStatement(
+				"INSERT INTO feedback (id_feedback, id_edizione, id_utente, descrizione, voto) VALUES (?,?,?,?,?)");
 
 		ps.setString(1, feedback.getIdUtente());
 		ps.setInt(2, feedback.getIdFeedback());
@@ -56,14 +59,26 @@ public class FeedBackDAOImpl implements FeedbackDAO {
 			throw new SQLException("feedback: " + feedback.getIdUtente() + " non presente");
 	}
 
+	@Override
+	public void updateSingoloFeedback(String descrizione, int voto, int idFeedback, int idEdizione) throws SQLException {
+		PreparedStatement ps = conn.prepareStatement(
+				"update feedback set descrizione = ?, voto = ? where id_feedback = ? and curdate() <= (select date_add(date_add(dataInizio, interval durata day), interval 30 day) from calendario where id_edizione = ?)");
+		ps.setString(1, descrizione);
+		ps.setInt(2, voto);
+		ps.setInt(3, idFeedback);
+		ps.setInt(4, idEdizione);
+		int n = ps.executeUpdate();
+		if (n == 0)
+			throw new SQLException("feedback: " + idFeedback + " non modificabile");
+	}
+
 	/*
 	 * cancellazione di un feedback se il feedback non esiste si solleva una
 	 * eccezione
 	 */
 	@Override
 	public void delete(int idFeedback) throws SQLException {
-		PreparedStatement ps = conn.prepareStatement(
-				"DELETE FROM feedback WHERE id_feedback = ?");
+		PreparedStatement ps = conn.prepareStatement("DELETE FROM feedback WHERE id_feedback = ?");
 		ps.setInt(1, idFeedback);
 		int n = ps.executeUpdate();
 		if (n == 0)
@@ -74,7 +89,7 @@ public class FeedBackDAOImpl implements FeedbackDAO {
 	 * lettura di un singolo feedback scritto da un utente per una certa edizione se
 	 * il feedback non esiste si solleva una eccezione
 	 */
-	@Override 
+	@Override
 	public Feedback selectSingoloFeedback(String idUtente, int idEdizione) throws SQLException {
 		PreparedStatement ps = conn.prepareStatement("SELECT * FROM feedback WHERE id_utente = ? AND id_edizione = ?");
 		ps.setString(1, idUtente);
@@ -96,10 +111,36 @@ public class FeedBackDAOImpl implements FeedbackDAO {
 		}
 	}
 
+//	@Override
+//	public boolean selectEndDate(int IdCorso) throws SQLException {
+//		PreparedStatement ps = conn.prepareStatement(
+//				"select date_add(date_add(dataInizio, interval durata day), interval 30 day) as EndDate from calendario where id_corso = ?");
+//		ps.setInt(1, IdCorso);
+//		ResultSet rs = ps.executeQuery();
+//
+//		Date date = rs.getDate(1);
+//		if (LocalDate.now().isBefore(date)) {
+//			return true;
+//		} else {
+//			throw new SQLException("IdCorso " + IdCorso + " non presente");
+//		}
+//	}
+	@Override
+	public void deleteSingoloFeedback(int idFeedback, int idEdizione) throws SQLException {
+		PreparedStatement ps = conn.prepareStatement(
+				"delete from feedback where id_feedback = ? and curdate() <= (select date_add(date_add(dataInizio, interval durata day), interval 30 day) from calendario where id_edizione = ?");
+		ps.setInt(1, idFeedback);
+		ps.setInt(2, idEdizione);
+		int n = ps.executeUpdate();
+		if (n == 0)
+			throw new SQLException("feedback: " + idFeedback + " non presente/non eliminabile");
+
+	}
 	/*
 	 * lettura di tutti i feedback di una certa edizione se non ci sono feedback o
 	 * l'edizione non esiste si torna una lista vuota
 	 */
+
 	@Override
 	public ArrayList<Feedback> selectPerEdizione(int idEdizione) throws SQLException {
 
@@ -172,7 +213,5 @@ public class FeedBackDAOImpl implements FeedbackDAO {
 		}
 		return feedback;
 	}
-
-	
 
 }

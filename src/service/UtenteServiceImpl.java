@@ -130,23 +130,17 @@ public class UtenteServiceImpl implements UtenteService {
 	 * mese dal termine della edizione del corso se l'utente non può modificare un
 	 * feedback si solleva una eccezione
 	 */
-	/** @Override
+	@Override
 	public void modificaFeedback(Feedback feedback) throws DAOException {
 		// TODO Auto-generated method stub
 		try {
-			if (... && daoF.selectEndDate(rs.getIdCorso()) {
-		
-				daoF.update(feedback.getVoto());
-		  		daoF.update(feedback.getDescrizione());
-			} else {
-				throw new DAOException("Impossibile modificare");
-			
+			daoF.updateSingoloFeedback(feedback.getDescrizione(), feedback.getVoto(), feedback.getIdFeedback(), feedback.getIdEdizione());
 		} catch (SQLException e) {
-			throw new DAOException("", e);
+			throw new DAOException("Impossibile modificare il feedback", e);
 
 		}
 
-	} **/
+	} 
 
 	/*
 	 * eliminazione di un feedback il feedback è cancellabile solo da parte
@@ -155,30 +149,17 @@ public class UtenteServiceImpl implements UtenteService {
 	 * eccezione
 	 */
 	@Override
-	public void cancellaFeedback(int idFeedback, int IdCorso) throws DAOException {
+	public void cancellaFeedback(int idFeedback, int idEdizione) throws DAOException {
 		// TODO Auto-generated method stub
 		try {
-			if(daoF.selectEndDate(IdCorso)) {
-				daoF.delete(idFeedback);
-			} else {
-				throw new DAOException("Fuori tempo massimo");
-			}
+			daoF.deleteSingoloFeedback(idFeedback, idEdizione);
 		} catch (SQLException e) {
-			throw new DAOException("", e);
+			throw new DAOException("Feedback non più eliminabile", e);
 		}
 
 	}
 
-	@Override
-	public void modificaFeedback(Feedback feedback) throws DAOException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void cancellaFeedback(int idFeedback) throws DAOException {
-		// TODO Auto-generated method stub
-		
-	}
-
+	
+	
+	
 }

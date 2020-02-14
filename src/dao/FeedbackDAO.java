@@ -15,7 +15,8 @@ public interface FeedbackDAO {
 	ArrayList<Feedback> selectPerEdizione(int idEdizione) throws SQLException;
 	ArrayList<Feedback> selectPerUtente(String idUtente) throws SQLException;
 	ArrayList<Feedback> selectFeedbackPerCorso(int idCorso) throws SQLException;
-	boolean selectEndDate(int IdCorso) throws SQLException;
+	void deleteSingoloFeedback(int idFeedback, int idEdizione) throws SQLException;
+	void updateSingoloFeedback(String descrizione, int voto, int idFeedback, int idEdizione) throws SQLException;
 	
 
 }
