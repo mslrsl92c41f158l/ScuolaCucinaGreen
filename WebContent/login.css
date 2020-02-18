@@ -3,7 +3,7 @@
 	height: 100%;
 	top: 0;
 	left: 0;
-	background: url(./img/cucina_stile_industrial_Boffi.jpg)
+	background: url(./img/logincut.jpg)
 		no-repeat center top;
 	position: fixed;
 	z-index: -1;
@@ -11,4 +11,37 @@
 	-moz-background-size: cover;
 	-o-background-size: cover;
 	background-size: cover;
+}
+
+.container-fluid {
+	text-align: center;
+}
+
+#accedi {
+	font-size:400%, 2em, 40px;
+	color: #b18d7c;
+	font-family: "Amita";
+}
+
+#buttonLog{
+	color: #b18d7c;
+	background-color: black;
+}
+
+.my1 {
+	color: white;
+}
+
+a {
+	color: black;
+}
+
+a:hover {
+	color: black;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+input {
+	background-color: #d7d7d7;
 }

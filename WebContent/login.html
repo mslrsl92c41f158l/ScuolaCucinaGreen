@@ -8,20 +8,25 @@
 <link rel="stylesheet" href="login.css">
 </head>
 <body>
-
 	<div class="row container-fluid">
-		<div id="imgbackground"></div>
-		<div class="col ">
-			<h1>
-				<a href="home.html" id="titolo" class="scelti">VINYL &reg;</a>
-			</h1>
+		<div class="row container-fluid">
+			<a href="index.html">Indietro</a>
+		</div>
+		<div class="col-lg-12">
+			<h1 class="display-4" id="accedi">Accedi</h1>
+			<br>
+			<form method="post" action="/login" class="my1">
+				<input type="text" name="user" value="Username" required>
+				<br>
+				<br> 
+				<input type="password" name="pw" value="Password"
+					required> <br>
+				<br> <a href="..." type="button" class="btn btn-default"
+					id="buttonLog">Login</a>
+			</form>
+
+			<div id="imgbackground"></div>
 		</div>
 	</div>
-	<p>Accedi</p>
-	<form method="post" action="/login">
-		Username <input type="text" name="user" required> <br>
-		Password <input type="password" name="pw" required> <br>
-		<input type="submit" value="LogIn">
-	</form>
 </body>
 </html>
