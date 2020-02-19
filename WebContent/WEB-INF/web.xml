@@ -19,4 +19,14 @@
     <servlet-name>Login</servlet-name>
     <url-pattern>/Login</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CorsiServlet</display-name>
+    <servlet-name>CorsiServlet</servlet-name>
+    <servlet-class>servlet.CorsiServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CorsiServlet</servlet-name>
+    <url-pattern>/CorsiServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
